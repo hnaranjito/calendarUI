@@ -19,7 +19,7 @@ getfebDays = (year) => {
 
 let calendar = document.querySelector('.calendar');
 
-const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const month_names = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 let month_picker = document.querySelector('#month-picker');
 
@@ -67,8 +67,23 @@ let month_list = calendar.querySelector('.month-list');
 month_names.forEach((e, index)=>{
     let month = document.createElement('div');
     month.innerHTML = `<div>${e}</div>`;
+    month.onclick = () => {
+        month_list.classList.remove('show');
+        curr_month.value = index;
+        generateCalendar(curr_month.value, curr_year.value);
+    }
     month_list.appendChild(month);
 });
+
+document.querySelector('#prev-year').onclick = () => {
+    --curr_year.value;
+    generateCalendar(curr_month.value, curr_year.value);
+}
+
+document.querySelector('#next-year').onclick = () => {
+    ++curr_year.value;
+    generateCalendar(curr_month.value, curr_year.value);
+}
 
 let currDate = new Date()
 
